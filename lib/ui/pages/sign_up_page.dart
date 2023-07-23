@@ -1,27 +1,32 @@
 import 'package:bank_sha/blocs/auth/auth_bloc.dart';
-import 'package:bank_sha/models/sign_in_form_model.dart';
+import 'package:bank_sha/models/sign_up_form_model.dart';
 import 'package:bank_sha/shared/shared_method.dart';
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/pages/sign_up_set_profile_page.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignUpPageState extends State<SignUpPage> {
+  final nameController = TextEditingController(text: '');
   final emailController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
 
   bool validate() {
-    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+    if (nameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        passwordController.text.isEmpty) {
       return false;
     }
+
     return true;
   }
 
@@ -34,9 +39,19 @@ class _SignInPageState extends State<SignInPage> {
             showCustomSnackbar(context, state.e);
           }
 
-          if (state is AuthSuccess) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, '/home', (route) => false);
+          if (state is AuthCheckEmailSuccess) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignUpSetProfilePage(
+                  data: SignUpFormModel(
+                    name: nameController.text,
+                    email: emailController.text,
+                    password: passwordController.text,
+                  ),
+                ),
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -66,7 +81,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
               Text(
-                "Sign in &\nGrow Your Finance",
+                "Join Us to Unlock\nYour Growth",
                 style: blackTextStyle.copyWith(
                   fontSize: 20,
                   fontWeight: semiBold,
@@ -82,6 +97,14 @@ class _SignInPageState extends State<SignInPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // NOTE : NAME INPUT
+                    CustomFormField(
+                      title: 'Full Name',
+                      controller: nameController,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     // NOTE : EMAIL INPUT
                     CustomFormField(
                       title: 'Email Address',
@@ -97,33 +120,18 @@ class _SignInPageState extends State<SignInPage> {
                       controller: passwordController,
                     ),
                     const SizedBox(
-                      height: 8,
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Forgot Password",
-                        style: blueTextStyle,
-                      ),
-                    ),
-                    const SizedBox(
                       height: 30,
                     ),
                     CustomFilledButton(
-                      title: 'Sign In',
+                      title: 'Continue',
                       onPressed: () {
                         if (validate()) {
-                          context.read<AuthBloc>().add(
-                                AuthLogin(
-                                  SignInFormModel(
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                  ),
-                                ),
-                              );
+                          context
+                              .read<AuthBloc>()
+                              .add(AuthCheckEmail(emailController.text));
                         } else {
                           showCustomSnackbar(
-                              context, 'Semua Field Harus Diisi');
+                              context, 'Semua Field harus diisi');
                         }
                       },
                     ),
@@ -134,11 +142,14 @@ class _SignInPageState extends State<SignInPage> {
                 height: 50,
               ),
               CustomTextButton(
-                title: 'Create New Account',
+                title: 'Sign In',
                 onPressed: () {
-                  Navigator.pushNamed(context, '/sign-up');
+                  Navigator.pushNamed(context, '/sign-in');
                 },
               ),
+              const SizedBox(
+                height: 30,
+              )
             ],
           );
         },

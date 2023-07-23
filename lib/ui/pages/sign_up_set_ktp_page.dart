@@ -1,25 +1,31 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:bank_sha/blocs/auth/auth_bloc.dart';
-import 'package:bank_sha/models/sign_in_form_model.dart';
+import 'package:bank_sha/models/sign_up_form_model.dart';
 import 'package:bank_sha/shared/shared_method.dart';
+import 'package:flutter/material.dart';
+
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
-import 'package:bank_sha/ui/widgets/forms.dart';
-import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class SignUpSetKtpPage extends StatefulWidget {
+  final SignUpFormModel data;
+  const SignUpSetKtpPage({
+    super.key,
+    required this.data,
+  });
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SignUpSetKtpPage> createState() => _SignUpSetKtpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
-  final emailController = TextEditingController(text: '');
-  final passwordController = TextEditingController(text: '');
-
+class _SignUpSetKtpPageState extends State<SignUpSetKtpPage> {
+  XFile? selectedImage;
   bool validate() {
-    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+    if (selectedImage == null) {
       return false;
     }
     return true;
@@ -66,7 +72,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
               Text(
-                "Sign in &\nGrow Your Finance",
+                "Verify Your\nAccount",
                 style: blackTextStyle.copyWith(
                   fontSize: 20,
                   fontWeight: semiBold,
@@ -80,50 +86,69 @@ class _SignInPageState extends State<SignInPage> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20), color: whiteColor),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // NOTE : EMAIL INPUT
-                    CustomFormField(
-                      title: 'Email Address',
-                      controller: emailController,
+                    GestureDetector(
+                      onTap: () async {
+                        final image = await selectImage();
+                        setState(() {
+                          selectedImage = image;
+                        });
+                      },
+                      child: Container(
+                        width: 120,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: lightBackgroundColor,
+                          image: selectedImage == null
+                              ? null
+                              : DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: FileImage(
+                                    File(selectedImage!.path),
+                                  ),
+                                ),
+                        ),
+                        child: selectedImage != null
+                            ? null
+                            : Center(
+                                child: Image.asset(
+                                  'assets/ic_upload.png',
+                                  width: 32,
+                                ),
+                              ),
+                      ),
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    // NOTE : PASSWORD INPUT
-                    CustomFormField(
-                      title: 'Password',
-                      obscureText: true,
-                      controller: passwordController,
+                    Text(
+                      'Passport/ID Card',
+                      style: blackTextStyle.copyWith(
+                          fontSize: 18, fontWeight: medium),
                     ),
                     const SizedBox(
-                      height: 8,
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Forgot Password",
-                        style: blueTextStyle,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30,
+                      height: 50,
                     ),
                     CustomFilledButton(
-                      title: 'Sign In',
+                      title: 'Continue',
                       onPressed: () {
                         if (validate()) {
                           context.read<AuthBloc>().add(
-                                AuthLogin(
-                                  SignInFormModel(
-                                    email: emailController.text,
-                                    password: passwordController.text,
+                                AuthRegister(
+                                  widget.data.copyWith(
+                                    // ignore: prefer_interpolation_to_compose_strings
+                                    ktp: 'data:image/png;base64,' +
+                                        base64Encode(File(selectedImage!.path)
+                                            .readAsBytesSync()),
                                   ),
                                 ),
                               );
                         } else {
                           showCustomSnackbar(
-                              context, 'Semua Field Harus Diisi');
+                            context,
+                            'Gambar tidak boleh kosong!!',
+                          );
                         }
                       },
                     ),
@@ -131,14 +156,18 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
               const SizedBox(
-                height: 50,
+                height: 60,
               ),
               CustomTextButton(
-                title: 'Create New Account',
+                title: 'Skip For Now',
                 onPressed: () {
-                  Navigator.pushNamed(context, '/sign-up');
+                  context.read<AuthBloc>().add(
+                        AuthRegister(
+                          widget.data,
+                        ),
+                      );
                 },
-              ),
+              )
             ],
           );
         },
