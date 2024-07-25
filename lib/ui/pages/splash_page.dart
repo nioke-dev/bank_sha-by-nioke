@@ -1,6 +1,6 @@
-import 'package:bank_sha/blocs/auth/auth_bloc.dart';
+import 'package:sha_bank/blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:bank_sha/shared/theme.dart';
+import 'package:sha_bank/shared/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashPage extends StatelessWidget {

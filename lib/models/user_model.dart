@@ -58,4 +58,9 @@ class UserModel {
         cardNumber: cardNumber,
         token: token,
       );
+      // Override toString method
+  @override
+  String toString() {
+    return 'UserModel{id: $id, name: $name, email: $email, password: $password, username: $username, verified: $verified, profilePcture: $profilePcture}';
+  }
 }

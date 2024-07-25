@@ -1,7 +1,7 @@
-import 'package:bank_sha/shared/theme.dart';
-import 'package:bank_sha/ui/widgets/buttons.dart';
+import 'package:sha_bank/shared/theme.dart';
+import 'package:sha_bank/ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
 
 class TransferAmountPage extends StatefulWidget {
@@ -211,7 +211,10 @@ class _TransferAmountPageState extends State<TransferAmountPage> {
             onPressed: () async {
               if (await Navigator.pushNamed(context, '/pin') == true) {
                 Navigator.pushNamedAndRemoveUntil(
-                    context, '/transfer-success', (route) => false);
+                    // ignore: use_build_context_synchronously
+                    context,
+                    '/transfer-success',
+                    (route) => false);
               }
             },
           ),

@@ -1,6 +1,6 @@
 {
-    "name": "bank_sha",
-    "short_name": "bank_sha",
+    "name": "sha_bank",
+    "short_name": "sha_bank",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

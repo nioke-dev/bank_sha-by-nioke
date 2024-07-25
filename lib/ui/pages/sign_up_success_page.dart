@@ -1,5 +1,5 @@
-import 'package:bank_sha/shared/theme.dart';
-import 'package:bank_sha/ui/widgets/buttons.dart';
+import 'package:sha_bank/shared/theme.dart';
+import 'package:sha_bank/ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class SignUpSuccessPage extends StatelessWidget {

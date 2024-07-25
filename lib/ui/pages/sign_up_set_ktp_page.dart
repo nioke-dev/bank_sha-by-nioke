@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bank_sha/blocs/auth/auth_bloc.dart';
-import 'package:bank_sha/models/sign_up_form_model.dart';
-import 'package:bank_sha/shared/shared_method.dart';
+import 'package:sha_bank/blocs/auth/auth_bloc.dart';
+import 'package:sha_bank/models/sign_up_form_model.dart';
+import 'package:sha_bank/shared/shared_method.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bank_sha/shared/theme.dart';
-import 'package:bank_sha/ui/widgets/buttons.dart';
+import 'package:sha_bank/shared/theme.dart';
+import 'package:sha_bank/ui/widgets/buttons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -163,7 +163,10 @@ class _SignUpSetKtpPageState extends State<SignUpSetKtpPage> {
                 onPressed: () {
                   context.read<AuthBloc>().add(
                         AuthRegister(
-                          widget.data,
+                          widget.data.copyWith(
+                            // ignore: prefer_interpolation_to_compose_strings
+                            ktp: null,
+                          ),
                         ),
                       );
                 },

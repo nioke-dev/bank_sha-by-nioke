@@ -1,4 +1,4 @@
-# bank_sha
+# sha_bank
 
 A new Flutter project.
 

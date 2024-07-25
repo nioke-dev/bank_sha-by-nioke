@@ -1,5 +1,5 @@
-import 'package:bank_sha/shared/shared_method.dart';
-import 'package:bank_sha/shared/theme.dart';
+import 'package:sha_bank/shared/shared_method.dart';
+import 'package:sha_bank/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class PackageItem extends StatelessWidget {

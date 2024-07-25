@@ -1,4 +1,4 @@
-import 'package:bank_sha/shared/theme.dart';
+import 'package:sha_bank/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -29,13 +29,14 @@ class HomeTipsItem extends StatelessWidget {
         }
       },
       child: Container(
-        width: 155,
+        width: double.infinity,
         height: 176,
         decoration: BoxDecoration(
           borderRadius: BorderRadiusDirectional.circular(20),
           color: whiteColor,
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.vertical(
@@ -43,7 +44,7 @@ class HomeTipsItem extends StatelessWidget {
               ),
               child: Image.asset(
                 imageUrl,
-                width: 155,
+                width: double.infinity,
                 height: 110,
                 fit: BoxFit.cover,
               ),
@@ -53,13 +54,15 @@ class HomeTipsItem extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
-                title,
-                style: blackTextStyle.copyWith(
-                  fontWeight: medium,
+              child: Expanded(
+                child: Text(
+                  title,
+                  style: blackTextStyle.copyWith(
+                    fontWeight: medium,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                 ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
               ),
             ),
           ],

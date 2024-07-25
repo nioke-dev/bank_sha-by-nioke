@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bank_sha/models/sign_up_form_model.dart';
-import 'package:bank_sha/shared/shared_method.dart';
-import 'package:bank_sha/ui/pages/sign_up_set_ktp_page.dart';
+import 'package:sha_bank/models/sign_up_form_model.dart';
+import 'package:sha_bank/shared/shared_method.dart';
+import 'package:sha_bank/ui/pages/sign_up_set_ktp_page.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bank_sha/shared/theme.dart';
-import 'package:bank_sha/ui/widgets/buttons.dart';
-import 'package:bank_sha/ui/widgets/forms.dart';
+import 'package:sha_bank/shared/theme.dart';
+import 'package:sha_bank/ui/widgets/buttons.dart';
+import 'package:sha_bank/ui/widgets/forms.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUpSetProfilePage extends StatefulWidget {

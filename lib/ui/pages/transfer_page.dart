@@ -1,8 +1,8 @@
-import 'package:bank_sha/shared/theme.dart';
-import 'package:bank_sha/ui/widgets/buttons.dart';
-import 'package:bank_sha/ui/widgets/forms.dart';
-import 'package:bank_sha/ui/widgets/transfer_recent_user_item.dart';
-import 'package:bank_sha/ui/widgets/transfer_result_user_item.dart';
+import 'package:sha_bank/shared/theme.dart';
+import 'package:sha_bank/ui/widgets/buttons.dart';
+import 'package:sha_bank/ui/widgets/forms.dart';
+import 'package:sha_bank/ui/widgets/transfer_recent_user_item.dart';
+import 'package:sha_bank/ui/widgets/transfer_result_user_item.dart';
 import 'package:flutter/material.dart';
 
 class TransferPage extends StatelessWidget {

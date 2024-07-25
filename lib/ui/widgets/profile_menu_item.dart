@@ -1,4 +1,4 @@
-import 'package:bank_sha/shared/theme.dart';
+import 'package:sha_bank/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class ProfileMenuItem extends StatelessWidget {

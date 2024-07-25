@@ -1,7 +1,7 @@
-import 'package:bank_sha/shared/shared_method.dart';
-import 'package:bank_sha/shared/theme.dart';
-import 'package:bank_sha/ui/widgets/buttons.dart';
-import 'package:bank_sha/ui/widgets/data_provider_item.dart';
+import 'package:sha_bank/shared/shared_method.dart';
+import 'package:sha_bank/shared/theme.dart';
+import 'package:sha_bank/ui/widgets/buttons.dart';
+import 'package:sha_bank/ui/widgets/data_provider_item.dart';
 import 'package:flutter/material.dart';
 
 class DataProviderPage extends StatelessWidget {
@@ -76,16 +76,16 @@ class DataProviderPage extends StatelessWidget {
           const SizedBox(
             height: 14,
           ),
-          DataProviderItem(
+          const DataProviderItem(
             name: 'Telkomsel',
             imageUrl: 'assets/img_provider_telkomsel.png',
             isSelected: true,
           ),
-          DataProviderItem(
+          const DataProviderItem(
             name: 'Indosat Ooredoo',
             imageUrl: 'assets/img_provider_indosat.png',
           ),
-          DataProviderItem(
+          const DataProviderItem(
             name: 'Singtel ID',
             imageUrl: 'assets/img_provider_singtel.png',
           ),

@@ -23,7 +23,8 @@ class AuthCheckEmailSuccess extends AuthState {}
 
 class AuthSuccess extends AuthState {
   final UserModel user;
-  const AuthSuccess(this.user);
+  final bool shouldNavigate;
+  const AuthSuccess(this.user, {this.shouldNavigate = true});
 
   @override
   List<Object> get props => [user];

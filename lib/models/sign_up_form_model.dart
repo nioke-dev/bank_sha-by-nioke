@@ -6,6 +6,7 @@ class SignUpFormModel {
   final String? profilePicture;
   final String? ktp;
 
+// buat constructor nya
   SignUpFormModel({
     this.name,
     this.email,
@@ -15,6 +16,7 @@ class SignUpFormModel {
     this.ktp,
   });
 
+// mengembalikan sebuah json atau object
   Map<String, dynamic> toJson() {
     return {
       'name': name,
@@ -23,9 +25,10 @@ class SignUpFormModel {
       'pin': pin,
       'profile_picture': profilePicture,
       'ktp': ktp,
-    };
+    }..removeWhere((key, value) => value == null);
   }
 
+// untuk mempertahankan data yang akan dibawa ke page selanjutnya yaitu set pin dan profile picture maupun ktp
   SignUpFormModel copyWith({
     String? pin,
     String? profilePicture,

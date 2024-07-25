@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:bank_sha/models/sign_in_form_model.dart';
-import 'package:bank_sha/models/sign_up_form_model.dart';
-import 'package:bank_sha/models/user_model.dart';
-import 'package:bank_sha/shared/shared_values.dart';
+import 'package:sha_bank/models/sign_in_form_model.dart';
+import 'package:sha_bank/models/sign_up_form_model.dart';
+import 'package:sha_bank/models/user_model.dart';
+import 'package:sha_bank/shared/shared_values.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
@@ -62,6 +62,26 @@ class AuthService {
         await storeCredentialToLocal(user);
 
         return user;
+      } else {
+        throw jsonDecode(res.body)['message'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      final token = await getToken();
+      final res = await http.post(
+        Uri.parse('$baseUrl/logout'),
+        headers: {
+          'Authorization': token,
+        },
+      );
+
+      if (res.statusCode == 200) {
+        await clearLocalStorage();
       } else {
         throw jsonDecode(res.body)['message'];
       }
