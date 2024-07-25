@@ -37,8 +37,7 @@ class ProfilePage extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          if (state is AuthSuccess) {
-            print(state.user.toString());
+          if (state is AuthSuccess) {            
             return ListView(
               padding: const EdgeInsets.symmetric(
                 horizontal: 24,

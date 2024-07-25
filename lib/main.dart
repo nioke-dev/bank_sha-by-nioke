@@ -14,7 +14,6 @@ import 'package:sha_bank/ui/pages/sign_in_page.dart';
 import 'package:sha_bank/ui/pages/sign_up_page.dart';
 import 'package:sha_bank/ui/pages/sign_up_success_page.dart';
 import 'package:sha_bank/ui/pages/splash_page.dart';
-import 'package:sha_bank/ui/pages/topup_amount_page.dart';
 import 'package:sha_bank/ui/pages/topup_page.dart';
 import 'package:sha_bank/ui/pages/topup_success.dart';
 import 'package:sha_bank/ui/pages/transfer_amount_page.dart';
@@ -26,7 +25,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +65,6 @@ class MyApp extends StatelessWidget {
           '/profile-edit-pin': (context) => const ProfileEditPinPage(),
           '/profile-edit-success': (context) => const ProfileEditSuccessPage(),
           '/topup': (context) => const TopupPage(),
-          '/topup-amount': (context) => const TopupAmountPage(),
           '/topup-success': (context) => const TopupSuccessPage(),
           '/transfer': (context) => const TransferPage(),
           '/transfer-amount': (context) => const TransferAmountPage(),

@@ -117,7 +117,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                               email: emailController.text,
                               password: passwordController.text,
                             )));
-                        print(emailController.text);
                       },
                     ),
                   ],

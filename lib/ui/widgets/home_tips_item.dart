@@ -29,14 +29,13 @@ class HomeTipsItem extends StatelessWidget {
         }
       },
       child: Container(
-        width: double.infinity,
+        width: 155,
         height: 176,
         decoration: BoxDecoration(
           borderRadius: BorderRadiusDirectional.circular(20),
           color: whiteColor,
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.vertical(
@@ -44,7 +43,7 @@ class HomeTipsItem extends StatelessWidget {
               ),
               child: Image.asset(
                 imageUrl,
-                width: double.infinity,
+                width: 155,
                 height: 110,
                 fit: BoxFit.cover,
               ),

@@ -96,24 +96,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
 
       if (event is AuthUpdatePin) {
-        print(event);
         try {
           if (state is AuthSuccess) {
-            print('ini tidak else');
             final updatedPin =
                 (state as AuthSuccess).user.copyWith(pin: event.newPin);
             _previousState = state;
-            print(_previousState);
             emit(AuthLoading());
             await WalletService().updatePin(event.oldPin, event.newPin);
             emit(AuthSuccess(updatedPin));
-          } else {
-            print('ini else');
-          }
+          } else {}
         } catch (e) {
           emit(AuthFailed(e.toString()));
           // Emit event untuk mengembalikan state setelah beberapa waktu
-          Future.delayed(Duration(seconds: 2), () {
+          Future.delayed(const Duration(seconds: 2), () {
             add(AuthRestoreState());
           });
         }
