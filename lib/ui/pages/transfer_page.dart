@@ -38,22 +38,23 @@ class TransferPage extends StatelessWidget {
             title: 'by username',
             isShowTitle: false,
           ),
-          // buildRecentUsers(),
-          buildResultUsers(),
+          buildRecentUsers(),
+          // buildResultUsers(),
           const SizedBox(
             height: 274,
           ),
-          CustomFilledButton(
-            title: 'Continue',
-            onPressed: () {
-              Navigator.pushNamed(context, '/transfer-amount');
-            },
-          ),
-          const SizedBox(
-            height: 50,
-          ),
         ],
       ),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.all(24),
+        child: CustomFilledButton(
+          title: 'Continue',
+          onPressed: () {
+            Navigator.pushNamed(context, '/transfer-amount');
+          },
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
